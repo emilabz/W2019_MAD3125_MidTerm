@@ -1,6 +1,8 @@
 package com.midtermmad3125.models;
 
-public class WeatherList {
+import java.io.Serializable;
+
+public class WeatherList implements Serializable {
     public Temp t;
     public long dt;
     public Double pressure;
@@ -10,7 +12,9 @@ public class WeatherList {
     public int deg;
     public int clouds;
     public Double rain;
+    public WeatherList(){
 
+    }
     public WeatherList(Temp t, long dt, Double pressure, int humidity, Weather w, Double speed, int deg, int clouds, Double rain) {
         this.t = t;
         this.dt = dt;

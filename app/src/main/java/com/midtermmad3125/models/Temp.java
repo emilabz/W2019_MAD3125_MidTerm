@@ -1,6 +1,8 @@
 package com.midtermmad3125.models;
 
-public class Temp {
+import java.io.Serializable;
+
+public class Temp implements Serializable {
     private Double day;
     private Double min;
     private Double max;

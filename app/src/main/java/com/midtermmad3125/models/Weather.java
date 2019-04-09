@@ -1,6 +1,8 @@
 package com.midtermmad3125.models;
 
-public class Weather {
+import java.io.Serializable;
+
+public class Weather implements Serializable {
     public int id;
     public String main;
     public String description;

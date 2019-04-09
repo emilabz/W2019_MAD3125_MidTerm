@@ -1,9 +1,11 @@
 package com.midtermmad3125.models;
 
-public class City {
-    public int id;
+import java.io.Serializable;
+
+public class City implements Serializable {
+    public long id;
     public String name;
-    public Coordinate coordinate;
+    public Coordinate coordinate=new Coordinate();
     public String countryCode;
     public String population;
 }

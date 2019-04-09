@@ -1,6 +1,8 @@
 package com.midtermmad3125.models;
 
-public class Coordinate {
+import java.io.Serializable;
+
+public class Coordinate implements Serializable {
     private Double lat;
     private Double lon;
 

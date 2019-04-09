@@ -31,21 +31,39 @@ public class MainCityActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         loadJSON();
         txtCity=findViewById(R.id.txtCity);
+        txtLat=findViewById(R.id.txtLat);
+        txtLong=findViewById(R.id.txtLong);
+        txtCountry=findViewById(R.id.txtCountry);
+        txtPopulation=findViewById(R.id.txtPopulation);
+        //txtCity.setText(m.city.name);
+        //txtLat.setText(m.city.coordinate.getLat());
+        //txtLong.setText(m.city.coordinate.getLon());
+        //txtCountry.setText(m.city.countryCode);
+        //txtPopulation.setText(m.city.population);
         Intent mIntent=new Intent(getApplicationContext(),WeatherListActivity.class);
-        //Intent.putExtra("Model", m);
+        mIntent.putExtra("Model", m);
+        startActivity(mIntent);
     }
     public void loadJSON(){
         String jsonString=ReadJSONUtils.loadJSONFromAsset(this,"moscow_weather.json");
         if (jsonString!=null){
+            Log.d("--inside--","not null");
             try {
                 JSONObject mjsonObject=new JSONObject(jsonString);
-                if (mjsonObject.has("id")){
-                    m.city.id=mjsonObject.getInt("id");
-                    m.city.name=mjsonObject.getString("name");
-                    m.city.coordinate.setLat(mjsonObject.getDouble("lat"));
-                    m.city.coordinate.setLon(mjsonObject.getDouble("lon"));
-                    m.city.countryCode=mjsonObject.getString("country");
-                    m.city.population=Integer.toString( mjsonObject.getInt("population"));
+                if (mjsonObject.has("city")){
+                    Log.d("--inside--","has city");
+                    JSONObject cityObj=mjsonObject.getJSONObject("city");
+                    if(cityObj.has("id")){
+                        Log.d("--inside--","has id");
+                        //m.city.id=cityObj.getInt("id");
+                        m.city.name=cityObj.getString("name");
+                        JSONObject coordObj=cityObj.getJSONObject("coord");
+                        m.city.coordinate.setLat(coordObj.getDouble("lat"));
+                        m.city.coordinate.setLon(coordObj.getDouble("lon"));
+                        m.city.countryCode=cityObj.getString("country");
+                        m.city.population=Integer.toString( cityObj.getInt("population"));
+                        Log.d("---json---","id:"+m.city.id+" name: "+m.city.name);
+                    }
                 }
 
             } catch (JSONException e) {
